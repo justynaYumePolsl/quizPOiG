@@ -1,0 +1,71 @@
+﻿<Window x:Class="Quiz.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:qv="clr-namespace:Quiz.View"
+        xmlns:vm="clr-namespace:Quiz.ViewModel"
+        xmlns:m="clr-namespace:Quiz.Model"
+        mc:Ignorable="d"
+        Title="Kreator Quizu" Height="1000" Width="800">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF595959" Offset="0"/>
+            <GradientStop Color="#FF0E0E0E" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+
+    <Window.DataContext>
+        <vm:QuizViewModel x:Name="viewModel" />
+    </Window.DataContext>
+    <Border Padding="20">
+        <StackPanel>
+            <TextBox Padding="10" x:Name="quizName" Text="{Binding Title}" FontSize="20" Foreground="#FF1F1F1F" Background="#FFB8B8B8"/>
+            <qv:QuestionView  Question="{Binding QuestionUpdate}" Answers="{Binding AnswersUpdate}" Margin="30" Background="#FF404040"/>
+
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" Margin="20 0">
+                    <Button Content="Dodaj/nadpisz to pytanie" Click="AddButtonClick" Padding="5" 
+                            FontSize="15" BorderBrush="White" Foreground="White" Background="#FF836838"/>
+                </Grid>
+                <Grid Grid.Column="1" Margin="20 0">
+                    <Button Content="Usuń to pytanie z listy" Click="RemoveButtonClick" Padding="5" 
+                            FontSize="15" Foreground="White" Background="#FF783B3B" BorderBrush="White"/>
+                </Grid>
+            </Grid>
+            <StackPanel Margin="20">
+                <TextBlock Padding="5"  Text="P Y T A N I A" FontWeight="Bold" FontSize="20" Background="#FF5D5D5D" 
+                           TextAlignment="Center" FontFamily="Source Code Pro Black" Foreground="White"/>
+                <ListBox Height="200" x:Name="listBox" ItemsSource="{Binding FileObjectCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+		                SelectedItem="{Binding SelectedFileObject}" SelectionChanged="{Binding SelectionChanged}"/>
+            </StackPanel>
+            <StackPanel>
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Margin="20 0">
+                        <Button Content="Wczytaj pytania z pliku" Command="{Binding LoadButtonClick}" Padding="5" 
+                                FontSize="15" Background="#FF1C6587" BorderBrush="White" Foreground="White"/>
+                    </Grid>
+                    <Grid Grid.Column="1" Margin="20 0">
+
+
+                        <Button Content="Zapisz quiz do pliku" Click="SaveButtonClick" Padding="5" 
+                                FontSize="15" Background="#FF2D8B58" BorderBrush="White" Foreground="White"/>
+
+
+                    </Grid>
+
+                </Grid>
+                <TextBox x:Name="tbWhereToSave" Margin="3" Padding="5" Text="{Binding Path}" 
+                         TextWrapping="Wrap" FontSize="14" TextAlignment="Center" BorderBrush="White" Background="#FF444444" Foreground="White"/>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</Window>

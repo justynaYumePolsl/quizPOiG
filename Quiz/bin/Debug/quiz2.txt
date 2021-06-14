@@ -1,0 +1,13 @@
+
+Treść pytania nr 1
+0|Odpowiedź błędna
+0|Odpowiedź błędna
+0|Odpowiedź błędna
+1|Odpowiedź poprawna
+**********
+Treść pytania nr 2
+0|Odpowiedź błędna
+0|Odpowiedź błędna
+1|Odpowiedź poprawna
+0|Odpowiedź błędna
+**********
