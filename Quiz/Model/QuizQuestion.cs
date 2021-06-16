@@ -1,6 +1,4 @@
-﻿
-
-namespace Quiz.Model
+﻿namespace Quiz.Model
 {
     public class QuizQuestion
     {

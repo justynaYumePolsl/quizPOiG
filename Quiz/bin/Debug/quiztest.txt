@@ -1,0 +1,7 @@
+Tytuł
+Pytanie
+0|Odp1
+0|Odp2
+1|Odp3-dobra
+0|Odp4
+**********

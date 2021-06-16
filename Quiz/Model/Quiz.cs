@@ -1,12 +1,12 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows;
 
 namespace Quiz.Model
 {
-    class Quiz
-    {
-        //private string pathToFile = "quiz.txt";
+    
         public class QuizQuestionsList
         {
             public List<QuizQuestion> listOfQuestions;
@@ -35,32 +35,40 @@ namespace Quiz.Model
                     string[] lines = File.ReadAllLines(pathToFile);
                     string title = lines[0];
                     int index = -1;
-                    for (int i = 1; i < lines.Length; i += 6)
+                    try
                     {
-                        
-                        string question = lines[i];
-                        string[] answers = { lines[i + 1].Substring(2), lines[i + 2].Substring(2), lines[i + 3].Substring(2), lines[i + 4].Substring(2) };
-                        if (lines[i + 1].Substring(0, 1) == "1")
+                        for (int i = 1; i < lines.Length; i += 6)
                         {
-                            index = 0;
+
+                            string question = lines[i];
+                            string[] answers = { lines[i + 1].Substring(2), lines[i + 2].Substring(2), lines[i + 3].Substring(2), lines[i + 4].Substring(2) };
+                            if (lines[i + 1].Substring(0, 1) == "1")
+                            {
+                                index = 0;
+                            }
+                            else if (lines[i + 2].Substring(0, 1) == "1")
+                            {
+                                index = 1;
+                            }
+                            else if (lines[i + 3].Substring(0, 1) == "1")
+                            {
+                                index = 2;
+                            }
+                            else if (lines[i + 4].Substring(0, 1) == "1")
+                            {
+                                index = 3;
+                            }
+                            QuizQuestion m = new QuizQuestion(question, answers);
+                            m.Index = index;
+                            listOfQuestions.Add(m);
+                            Title = title;
                         }
-                        else if (lines[i + 2].Substring(0, 1) == "1")
-                        {
-                            index = 1;
-                        }
-                        else if (lines[i + 3].Substring(0, 1) == "1")
-                        {
-                            index = 2;
-                        }
-                        else if (lines[i + 4].Substring(0, 1) == "1")
-                        {
-                            index = 3;
-                        }
-                        QuizQuestion m = new QuizQuestion(question, answers);
-                        m.Index = index;
-                        listOfQuestions.Add(m);
-                        Title=title;
                     }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Plik nie jest w odpowiednim formacie lub jego treść jest źle sformatowana!", "B Ł Ą D");
+                    listOfQuestions.Clear();
+                }
                 }
                 else
                 {
@@ -92,7 +100,7 @@ namespace Quiz.Model
                 File.WriteAllText(pathToFile, text);
             }
         }
-    }
-
-
 }
+
+
+
