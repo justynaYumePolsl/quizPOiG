@@ -77,7 +77,12 @@ namespace Quiz.Model
             }
 
             public void SaveQuestions(string pathToFile, QuizQuestionsList list)
+            { 
+                if(pathToFile.Substring(pathToFile.Length - 4) != ".txt")
             {
+                MessageBox.Show("Nazwa pliku musi się kończyć rozszerzeniem .txt!", "B Ł Ą D");
+                return;
+            }
                 string text = list.Title+"\n";
 
                 foreach (QuizQuestion q in list.listOfQuestions)
